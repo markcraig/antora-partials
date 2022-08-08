@@ -1,0 +1,6 @@
+name: antora-partials
+title: Asciidoc to include
+version: ~
+start_page: ROOT:index.adoc
+nav:
+  - modules/ROOT/nav.adoc

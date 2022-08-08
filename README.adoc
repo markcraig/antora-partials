@@ -1,0 +1,5 @@
+= Companion project to reproduce PDF generation issues
+
+This is a companion repo to https://github.com/markcraig/antora-pdf[].
+
+It provides partials for inclusion in that project.

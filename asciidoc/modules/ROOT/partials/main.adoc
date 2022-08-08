@@ -1,0 +1,6 @@
+= The main partial
+
+This includes another partial.
+
+// When this is uncommented, building a PDF fails with a SecurityError:
+include::fragment.adoc[]

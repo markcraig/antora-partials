@@ -1,0 +1,3 @@
+= Overview
+
+Shared Asciidoc partials for inclusion in other Antora components.
