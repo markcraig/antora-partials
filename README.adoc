@@ -1,5 +1,44 @@
-= Companion project to reproduce PDF generation issues
+= PDF generation: Jail is not an absolute path
 
-This is a companion repo to https://github.com/markcraig/antora-pdf[].
+This is for investigating https://gitlab.com/antora/antora-assembler/[Antora Assembler]
+to produce PDFs in an Antora-native way, rather than our current hacks.
 
-It provides partials for inclusion in that project.
+It aims to reproduce problems encountered when generating PDFs that aren't seen when generating HTML.
+
+== Before you start
+
+Follow the instructions in the 
+https://gitlab.com/antora/antora-assembler/-/blob/main/README.adoc[Antora Assembler README]
+to install the software you need for the builds.
+
+Notice that this repo already provides the `Gemfile`, `antora-assembler.yml`, and `pdf-theme.yml` files.
+
+== Build HTML
+
+[source]
+----
+npx antora site.yml --stacktrace 
+Site generation complete!
+Open file:///path/to/antora-partials/build/site/index.html in a browser to view your site.
+----
+
+== Build PDF
+
+[source]
+----
+npx antora site-pdf.yml --stacktrace 
+[13:47:43.752] FATAL (antora): Jail is not an absolute path: modules/ROOT/pages
+    Cause: SecurityError
+        at Opal.send (/usr/local/lib/node_modules/@antora/site-generator/node_modules/asciidoctor-opal-runtime/src/opal.js:1671:19)
+        at Function.$$exception (/usr/local/lib/node_modules/@antora/site-generator/node_modules/asciidoctor-opal-runtime/src/opal.js:4993:14)
+        at constructor.$$raise (/usr/local/lib/node_modules/@antora/site-generator/node_modules/asciidoctor-opal-runtime/src/opal.js:4681:31)
+        at constructor.$$system_path (/usr/local/lib/node_modules/@antora/site-generator/node_modules/@asciidoctor/core/dist/node/asciidoctor.js:12950:18)
+        at constructor.$$normalize_system_path (/usr/local/lib/node_modules/@antora/site-generator/node_modules/@asciidoctor/core/dist/node/asciidoctor.js:5644:37)
+        at constructor.$$resolve_include_path (/usr/local/lib/node_modules/@antora/site-generator/node_modules/@asciidoctor/core/dist/node/asciidoctor.js:14714:26)
+        at constructor.$$preprocess_include_directive (/usr/local/lib/node_modules/@antora/site-generator/node_modules/@asciidoctor/core/dist/node/asciidoctor.js:14356:21)
+        at constructor.$$process_line (/usr/local/lib/node_modules/@antora/site-generator/node_modules/@asciidoctor/core/dist/node/asciidoctor.js:14145:37)
+        at constructor.$$peek_line (/usr/local/lib/node_modules/@antora/site-generator/node_modules/@asciidoctor/core/dist/node/asciidoctor.js:13331:37)
+        at Opal.send (/usr/local/lib/node_modules/@antora/site-generator/node_modules/asciidoctor-opal-runtime/src/opal.js:1671:19)
+----
+
+For a workaround in the Asciidoc, see `asciidoc/modules/ROOT/partials/main.adoc`.

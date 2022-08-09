@@ -2,5 +2,7 @@
 
 This includes another partial.
 
-// When this is uncommented, building a PDF fails with a SecurityError:
+// This causes the PDF build to throw a fatal error:
 include::fragment.adoc[]
+// This lets the PDF build succeed:
+//include::ROOT:partial$fragment.adoc[]
